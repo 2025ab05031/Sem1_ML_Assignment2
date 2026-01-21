@@ -11,9 +11,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
-def run_linear_regression(X, y) :
+def run_logistic_regression(X, y) :
 
-    st.info(f"Running predictions using: {run_linear_regression}")
+    st.info(f"Running predictions using: {run_logistic_regression}")
     
     import pickle
     import pandas as pd
