@@ -26,7 +26,7 @@ uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 
 if uploaded_file is not None:
     data_set = pd.read_csv(uploaded_file)
-    st.write("Preview of Test Data (or Download csv file from top right of the table):", test_data.head())
+    st.write("Preview of Test Data (or Download csv file from top right of the table):", data_set.head())
 
     # 2. Model Selection Dropdown [Source 4, 8]
     st.header("2. Select Model")
@@ -52,14 +52,12 @@ if uploaded_file is not None:
         iris = load_iris()
         X = iris.data
         y = iris.target
-    else:
-        test_data = pd.read_csv(uploaded_file)
-    
+    else:    
         # Last column is target
         target_col = data_set.columns[-1]
         
-        X = test_data.drop(columns=[target_col])
-        y = test_data[target_col]
+        X = data_set.drop(columns=[target_col])
+        y = data_set[target_col]
 
     # Split data into train and test
     X_train, X_test, y_train, y_test = train_test_split(
@@ -74,9 +72,7 @@ if uploaded_file is not None:
     acc = accuracy_score(y_test, y_prob)
     
     conf_matrix = confusion_matrix(y_test, y_prob) 
-
-
-
+    print(conf_matrix)
 
     
     # 3. Display Evaluation Metrics [Source 4, 5, 8]
