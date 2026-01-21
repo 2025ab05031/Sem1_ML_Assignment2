@@ -3,7 +3,7 @@ st.title("Machine Learning Model Deployment - Assignment 2")
 
 # 1. Dataset Upload Option [Source 8]
 st.header("1. Upload Test Data")
-uploaded_file = st.file_file_uploader("Upload your test CSV file", type=["csv"])
+uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 
 if uploaded_file is not None:
     test_data = pd.read_csv(uploaded_file)
