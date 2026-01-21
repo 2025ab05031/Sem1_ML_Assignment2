@@ -4,6 +4,12 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics import confusion_matrix 
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+
 
 # from sklearn.metrics import (
 #     accuracy_score, precision_score, recall_score, 
@@ -14,12 +20,16 @@ import seaborn as sns
 
 st.title("Machine Learning Model Deployment - Assignment 2")
 
+
+
+model = load_model()
+
 # 1. Dataset Upload Option [Source 8]
 st.header("1. Upload Test Data")
 uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 
 if uploaded_file is not None:
-    test_data = pd.read_csv(uploaded_file)
+    data_set = pd.read_csv(uploaded_file)
     st.write("Preview of Test Data (or Download csv file from top right of the table):", test_data.head())
 
     # 2. Model Selection Dropdown [Source 4, 8]
@@ -40,12 +50,45 @@ if uploaded_file is not None:
     # In practice, you would load your model from the /model folder [Source 5]
     st.info(f"Running predictions using: {model_choice}")
 
+
+    # Load Iris dataset as fallback
+    if uploaded_file is None:
+        iris = load_iris()
+        X = iris.data
+        y = iris.target
+
+    test_data = pd.read_csv(uploaded_file)
+
+    # Last column is target
+    target_col = data_set.columns[-1]
+    
+    X = test_data.drop(columns=[target_col])
+    y = test_data[target_col]
+
+    # Split data into train and test
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y, shuffle=True
+    )
+    # Linear Regression
+    logreg = LogisticRegression(multi_class="multinomial", solver="lbfgs", C=5) 
+    
+    logreg.fit(X_train, y_train) # train
+
+    y_prob  = logreg.predict(X_test)
+    acc = accuracy_score(y_test, y_prob)
+    
+    conf_matrix = confusion_matrix(y_test, y_prob) 
+
+
+
+
+    
     # 3. Display Evaluation Metrics [Source 4, 5, 8]
     st.header("3. Evaluation Metrics")
     
     # These variables should be replaced with actual calculation results
     col1, col2, col3 = st.columns(3)
-    col1.metric("Accuracy", "0.00")
+    col1.metric("Accuracy", acc)
     col1.metric("AUC Score", "0.00")
     col2.metric("Precision", "0.00")
     col2.metric("Recall", "0.00")
