@@ -100,11 +100,11 @@ if uploaded_file is not None:
     col3.metric("MCC Score", "0.00")
 
     # 4. Confusion Matrix [Source 8]
-    st.header("4. Confusion Matrix")
-    # Example visualization using Seaborn/Matplotlib [Source 5]
-    fig, ax = plt.subplots()
-    # sns.heatmap(cm, annot=True, ax=ax) # cm would be your calculated confusion matrix
-    st.pyplot(fig)
+    # st.header("4. Confusion Matrix")
+    # # Example visualization using Seaborn/Matplotlib [Source 5]
+    # fig, ax = plt.subplots()
+    # # sns.heatmap(cm, annot=True, ax=ax) # cm would be your calculated confusion matrix
+    # st.pyplot(fig)
 
 else:
     st.warning("Please upload a CSV file to proceed.")
