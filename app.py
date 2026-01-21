@@ -1,4 +1,15 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, 
+    f1_score, roc_auc_score, matthews_corrcoef, confusion_matrix
+)
+# import specific model loading logic or libraries
+# e.g., import joblib or pickle
+
 st.title("Machine Learning Model Deployment - Assignment 2")
 
 # 1. Dataset Upload Option [Source 8]
