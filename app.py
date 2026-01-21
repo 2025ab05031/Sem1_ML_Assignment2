@@ -81,10 +81,10 @@ if uploaded_file is not None:
     linreg.fit(X_train_num, y_train) # train
 
     y_prob  = linreg.predict(X_test_num)
-    # acc = accuracy_score(y_test, y_prob)
+    acc = accuracy_score(y_test, y_prob)
     
-    conf_matrix = confusion_matrix(y_test, y_prob) 
-    print(conf_matrix)
+    # conf_matrix = confusion_matrix(y_test, y_prob) 
+    # print(conf_matrix)
 
     
     # 3. Display Evaluation Metrics [Source 4, 5, 8]
