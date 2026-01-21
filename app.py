@@ -103,9 +103,9 @@ if uploaded_file is not None:
     
     if st.button("Run"):
         if model_choice == "Linear Regression":
-            run_linear_regression(X, y)      # <- call def1 here
+            run_linear_regression(X_train_num, y)      # <- call def1 here
         elif model_choice == "Logistic Regression":
-            run_logistic_regression()
+            run_logistic_regression(X_train_num, y)
         else:
             st.info(f"Running predictions using: {model_choice}")
     
