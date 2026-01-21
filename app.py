@@ -86,10 +86,10 @@ if uploaded_file is not None:
     imputer = SimpleImputer(strategy="mean")
     X_train_num = imputer.fit_transform(X_train_num)  # now NumPy array, no NaN
     
-    # Optional: also ensure y has no NaN
-    mask = ~pd.isna(y)
-    y = y[mask]
-    X_train_num = X_train_num[mask]
+    # # Optional: also ensure y has no NaN
+    # mask = ~pd.isna(y)
+    # y = y[mask]
+    # X_train_num = X_train_num[mask]
 
     
     # 2. Model Selection Dropdown [Source 4, 8]
