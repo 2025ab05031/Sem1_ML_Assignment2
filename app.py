@@ -17,8 +17,8 @@ st.header("1. Upload Test Data")
 uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 
 if uploaded_file is not None:
-    test_data = pd.read_csv(uploaded_file)
-    st.write("Preview of Test Data:", test_data.head())
+    # test_data = pd.read_csv(uploaded_file)
+    # st.write("Preview of Test Data:", test_data.head())
 
     # 2. Model Selection Dropdown [Source 4, 8]
     st.header("2. Select Model")
