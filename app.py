@@ -81,7 +81,7 @@ if uploaded_file is not None:
     linreg.fit(X_train_num, y_train) # train
 
     y_prob  = linreg.predict(X_test_num)
-    acc = accuracy_score(y_test, y_prob)
+    # acc = accuracy_score(y_test, y_prob)
     
     # conf_matrix = confusion_matrix(y_test, y_prob) 
     # print(conf_matrix)
@@ -92,7 +92,7 @@ if uploaded_file is not None:
     
     # These variables should be replaced with actual calculation results
     col1, col2, col3 = st.columns(3)
-    col1.metric("Accuracy", acc)
+    col1.metric("Accuracy", "0.00")
     col1.metric("AUC Score", "0.00")
     col2.metric("Precision", "0.00")
     col2.metric("Recall", "0.00")
