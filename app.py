@@ -63,13 +63,16 @@ if uploaded_file is not None:
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y, shuffle=True
     )
-    # Linear Regression
-    logreg = LogisticRegression() # multi_class="multinomial", solver="lbfgs", C=5) 
+    st.write("X_train:", X_train.head())
+    st.write("y_train:", y_train.head())
     
-    logreg.fit(X_train, y_train) # train
+    # Linear Regression
+    linreg = LinearRegression() # multi_class="multinomial", solver="lbfgs", C=5) 
+    
+    linreg.fit(X_train, y_train) # train
 
-    y_prob  = logreg.predict(X_test)
-    acc = accuracy_score(y_test, y_prob)
+    y_prob  = linreg.predict(X_test)
+    # acc = accuracy_score(y_test, y_prob)
     
     conf_matrix = confusion_matrix(y_test, y_prob) 
     print(conf_matrix)
