@@ -11,7 +11,32 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
+def run_linear_regression(X, y) :
 
+    st.info(f"Running predictions using: {run_linear_regression}")
+    
+    import pickle
+    import pandas as pd
+    from sklearn.metrics import accuracy_score
+    
+    # Load the saved model
+    with open("models/logreg_model.pkl", "rb") as f:
+        loaded_model = pickle.load(f)
+        
+    # For demo, reuse entire X,y or use a stored X_test,y_test
+    y_pred = loaded_model.predict(X)
+    
+    st.write("Predictions:", y_pred[:10])          # first 10 predictions
+    st.write("True labels:", y[:10].to_list())
+    
+    # If you have X_test, y_test from train_test_split:
+    # y_pred = loaded_model.predict(X_test)
+    # acc = accuracy_score(y_test, y_pred)
+    # print("Accuracy:", acc)
+
+
+
+    
 # from sklearn.metrics import (
 #     accuracy_score, precision_score, recall_score, 
 #     f1_score, roc_auc_score, matthews_corrcoef, confusion_matrix
@@ -28,25 +53,6 @@ uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 if uploaded_file is not None:
     data_set = pd.read_csv(uploaded_file)
     st.write("Preview of Test Data (or Download csv file from top right of the table):", data_set.head())
-
-    # 2. Model Selection Dropdown [Source 4, 8]
-    st.header("2. Select Model")
-    model_choice = st.selectbox(
-        "Choose a classification model:",
-        [
-            "Logistic Regression", 
-            "Decision Tree Classifier", 
-            "K-Nearest Neighbor Classifier", 
-            "Naive Bayes Classifier", 
-            "Random Forest (Ensemble)", 
-            "XGBoost (Ensemble)"
-        ]
-    )
-
-    # placeholder for actual prediction logic
-    # In practice, you would load your model from the /model folder [Source 5]
-    st.info(f"Running predictions using: {model_choice}")
-
 
     # Load Iris dataset as fallback
     if uploaded_file is None:
@@ -75,17 +81,33 @@ if uploaded_file is not None:
     X_train_num = X_train.select_dtypes(include=["number"])
     X_test_num  = X_test.select_dtypes(include=["number"])
 
-    # Linear Regression
-    linreg = LinearRegression() # multi_class="multinomial", solver="lbfgs", C=5) 
     
-    linreg.fit(X_train_num, y_train) # train
+    # 2. Model Selection Dropdown [Source 4, 8]
+    st.header("2. Select Model")
+    model_choice = st.selectbox(
+        "Choose a classification model:",
+        [
+            "Linear Regression",
+            "Logistic Regression", 
+            "Decision Tree Classifier", 
+            "K-Nearest Neighbor Classifier", 
+            "Naive Bayes Classifier", 
+            "Random Forest (Ensemble)", 
+            "XGBoost (Ensemble)"
+        ]
+    )
 
-    y_prob  = linreg.predict(X_test_num)
-    # acc = accuracy_score(y_test, y_prob)
+    # placeholder for actual prediction logic
+    # In practice, you would load your model from the /model folder [Source 5]
+    st.info(f"Running predictions using: {model_choice}")
     
-    # conf_matrix = confusion_matrix(y_test, y_prob) 
-    # print(conf_matrix)
-
+    if st.button("Run"):
+        if model_choice == "Linear Regression":
+            run_linear_regression(X, y)      # <- call def1 here
+        elif model_choice == "Logistic Regression":
+            run_logistic_regression()
+        else:
+            st.info(f"Running predictions using: {model_choice}")
     
     # 3. Display Evaluation Metrics [Source 4, 5, 8]
     st.header("3. Evaluation Metrics")
