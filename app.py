@@ -64,15 +64,23 @@ if uploaded_file is not None:
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y, shuffle=True
     )
+    st.write(X_train.dtypes)
+    st.write(X_train.head())
+    st.write(y_train.dtype)
+
     st.write("X_train:", X_train.head())
     st.write("y_train:", y_train.head())
-    
+
+    # Drop non-numeric columns
+    X_train_num = X_train.select_dtypes(include=["number"])
+    X_test_num  = X_test.select_dtypes(include=["number"])
+
     # Linear Regression
     linreg = LinearRegression() # multi_class="multinomial", solver="lbfgs", C=5) 
     
-    linreg.fit(X_train, y_train) # train
+    linreg.fit(X_train_num, y_train) # train
 
-    y_prob  = linreg.predict(X_test)
+    y_prob  = linreg.predict(X_test_num)
     # acc = accuracy_score(y_test, y_prob)
     
     conf_matrix = confusion_matrix(y_test, y_prob) 
