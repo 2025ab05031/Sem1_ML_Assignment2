@@ -10,6 +10,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
 
 def run_logistic_regression(X, y) :
 
@@ -80,6 +81,15 @@ if uploaded_file is not None:
     # Drop non-numeric columns
     X_train_num = X_train.select_dtypes(include=["number"])
     X_test_num  = X_test.select_dtypes(include=["number"])
+
+    # impute NaNs
+    imputer = SimpleImputer(strategy="mean")
+    X_train_num = imputer.fit_transform(X_train_num)  # now NumPy array, no NaN
+    
+    # Optional: also ensure y has no NaN
+    mask = ~pd.isna(y)
+    y = y[mask]
+    X_train_num = X_train_num[mask]
 
     
     # 2. Model Selection Dropdown [Source 4, 8]
