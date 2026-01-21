@@ -64,7 +64,7 @@ if uploaded_file is not None:
         X, y, test_size=0.2, random_state=42, stratify=y, shuffle=True
     )
     # Linear Regression
-    logreg = LogisticRegression(multi_class="multinomial", solver="lbfgs", C=5) 
+    logreg = LogisticRegression() # multi_class="multinomial", solver="lbfgs", C=5) 
     
     logreg.fit(X_train, y_train) # train
 
