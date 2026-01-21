@@ -17,9 +17,9 @@ st.title("Machine Learning Model Deployment - Assignment 2")
 st.header("1. Upload Test Data")
 uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 
-# if uploaded_file is not None:
-#     # test_data = pd.read_csv(uploaded_file)
-#     # st.write("Preview of Test Data:", test_data.head())
+if uploaded_file is not None:
+    test_data = pd.read_csv(uploaded_file)
+    st.write("Preview of Test Data:", test_data.head())
 
 #     # 2. Model Selection Dropdown [Source 4, 8]
 #     st.header("2. Select Model")
@@ -58,5 +58,5 @@ uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
 #     # sns.heatmap(cm, annot=True, ax=ax) # cm would be your calculated confusion matrix
 #     # st.pyplot(fig)
 
-# else:
-#     st.warning("Please upload a CSV file to proceed.")
+else:
+    st.warning("Please upload a CSV file to proceed.")
