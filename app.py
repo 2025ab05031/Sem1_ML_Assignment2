@@ -20,10 +20,6 @@ from sklearn.model_selection import train_test_split
 
 st.title("Machine Learning Model Deployment - Assignment 2")
 
-
-
-model = load_model()
-
 # 1. Dataset Upload Option [Source 8]
 st.header("1. Upload Test Data")
 uploaded_file = st.file_uploader("Upload your test CSV file", type=["csv"])
@@ -56,14 +52,14 @@ if uploaded_file is not None:
         iris = load_iris()
         X = iris.data
         y = iris.target
-
-    test_data = pd.read_csv(uploaded_file)
-
-    # Last column is target
-    target_col = data_set.columns[-1]
+    else:
+        test_data = pd.read_csv(uploaded_file)
     
-    X = test_data.drop(columns=[target_col])
-    y = test_data[target_col]
+        # Last column is target
+        target_col = data_set.columns[-1]
+        
+        X = test_data.drop(columns=[target_col])
+        y = test_data[target_col]
 
     # Split data into train and test
     X_train, X_test, y_train, y_test = train_test_split(
