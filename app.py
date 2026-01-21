@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 # from sklearn.metrics import (
 #     accuracy_score, precision_score, recall_score, 
 #     f1_score, roc_auc_score, matthews_corrcoef, confusion_matrix
@@ -53,10 +54,10 @@ if uploaded_file is not None:
 
     # 4. Confusion Matrix [Source 8]
     st.header("4. Confusion Matrix")
-#     # Example visualization using Seaborn/Matplotlib [Source 5]
-#     # fig, ax = plt.subplots()
-#     # sns.heatmap(cm, annot=True, ax=ax) # cm would be your calculated confusion matrix
-#     # st.pyplot(fig)
+    # Example visualization using Seaborn/Matplotlib [Source 5]
+    fig, ax = plt.subplots()
+    # sns.heatmap(cm, annot=True, ax=ax) # cm would be your calculated confusion matrix
+    st.pyplot(fig)
 
 else:
     st.warning("Please upload a CSV file to proceed.")
